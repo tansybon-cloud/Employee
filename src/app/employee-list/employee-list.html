@@ -1,0 +1,39 @@
+<div class="container">
+    <h2>Employee List</h2>
+
+    <!-- លក្ខខណ្ឌថា បើគ្មានបុគ្គលិក បង្ហាញសារ "No employees available." -->
+    <div *ngIf="employees.length === 0; else tableBlock">
+        <p>No employees available.</p>
+    </div>
+
+    <!-- បើមានប   ុគ្គលិក បង្ហាញតារាង -->
+    <ng-template #tableBlock>
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Status</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ប្រើ *ngFor ដើម្បី loop បង្ហាញទិន្នន័យម្តងមួយៗ -->
+                <tr *ngFor="let emp of employees">
+                    <td>{{ emp.id }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.position }}</td>
+                    <td>{{ emp.salary }}</td>
+                    <td>
+                        <span class="status" [class.status-active]="emp.status === 'Active'" [class.status-inactive]="emp.status === 'Inactive'">
+                            {{ emp.status }}
+                        </span>
+                    </td>
+                    <td><span class="level">{{ emp.level }}</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-template>
+</div>
